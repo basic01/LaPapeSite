@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>La Pape</title>
+</head>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+        background-color: #FEFEFE;
+        outline: none;
+    }
+
+    .contenedor{
+        width: 100%;
+        height: 100vh;
+        padding: 1em;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color:#007ACC;
+    }
+
+    .contenido h1{
+        font-size: 4em;
+        line-height: 1em;
+        margin-bottom: 25px;
+        margin-top: 10px;
+        background-color: inherit;
+    }
+
+    .contenido h3{
+        color: #007ACC;
+        background-color: inherit;
+    }
+
+    .contenido p{
+        margin-top: 5px;
+        background-color: inherit;
+        color: rgba(0,0,0,.8);
+        margin-bottom: 1em;
+    }
+
+    .contenido{
+        margin-top: -1em;
+        border-radius: 5px;
+        background-color: #fff;
+        float: left;
+        padding: 1em 3em;
+        box-shadow: 0 0 5px 6px rgba(0,0,0,.2);
+    }
+
+</style>
+
+<body>
+   <div class="contenedor">
+       <div class="contenido">
+            <h1>La Pape</h1>
+            <h3>¡Confirmación exitosa!</h3>
+            <p>Tu cuenta ha sido confirmada. Gracias por unirte a La Pape</p>
+       </div>
+   </div>
+</body>
+</html>
+
+<script>
+
+    let url = 'http://127.0.0.1:8000/usuarios/';
+    const form = new FormData();
+    
+    async function getURL(){
+        const url_string = window.location.href;
+        const direccion = new URL(url_string);
+        const u = direccion.searchParams.get('u');
+        url += `${u}/`;
+    }
+
+    async function obtenerData(url){
+        const response = await fetch(url);
+        const element = await response.json();
+        return element;
+    }
+    
+    async function obtenerForm(data){
+        let form = new FormData();
+        form.append('id', data.id)
+        form.append('nombre', data.nombre);
+        form.append('apellidos', data.apellidos);
+        form.append('correo', data.correo);
+        form.append('contraseña',data.contraseña);
+        form.append('status', 1);
+        return form;
+    }
+
+    async function mandarData(url, data){
+        const response = await fetch(url, {
+            method: 'PUT',
+            body: data
+        })
+        const resp = await response.json();
+        return resp;
+    }
+
+    async function work(){
+        await getURL();
+        const data = await obtenerData(url);
+        const form = await obtenerForm(data);
+        console.log(await mandarData(url, form));
+    }
+
+    work();
+
+</script>

@@ -1,0 +1,39 @@
+.fondoPopUp{
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.popUp{
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    padding: 1em 2em;
+    text-align: center;
+}
+
+.row{
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.popUp h4{
+    font-size: 2em;
+}
+
+.popUp .boton{
+    width: 60%;
+    padding: .6em 1em;
+    margin-bottom: 5px;
+}

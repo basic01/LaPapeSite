@@ -1,0 +1,128 @@
+.contenedor{
+    margin-top: 5em;
+}
+
+/*-- tarjetas --*/
+.tarjetas{
+    width: 94%;
+    margin: 2em 3% !important;
+}
+
+@media (max-width:500px){
+    .tarjetas{
+        width: 100%;
+        margin: 2em 0 !important;
+    }
+}
+
+.tarjetas h1{
+    width: 100%;
+    font-size: 1.8em;
+    padding-left: .5em;
+    margin-bottom: 1em;
+    background-color: #fff;
+}
+/*-- tarjetas --*/
+
+/*-- tarjeta --*/
+h3{
+    font-size: 1.1em;
+    margin-bottom: 1em;
+}
+
+h4{
+    font-size: .9em;
+}
+
+.boton {
+    font-size: .8em;
+}
+
+h1, h3, h4{
+    font-weight: bold;
+    background-color: inherit;
+}
+
+
+.tarjeta{
+    padding: 1em;
+    margin-bottom: 2em;
+    padding-bottom: 0em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #FFF;
+    border: 1px solid rgba(0,0,0,.06);
+    box-shadow: 0px 0px 10px 2px rgba(0,0,0,.06);
+}
+
+.tarjeta h3{
+    color: rgba(0,0,0,.9);
+}
+
+.tarjeta img{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 1em;
+    object-fit: cover;
+    box-shadow: 0px 0px 10px 2px rgba(0,0,0,.06);
+    border: 1px solid rgba(0,0,0,.06);
+}
+.tarjeta label{
+    font-size: 1.3em;
+    margin-bottom: 1em;
+    color: #007ACC;
+    background-color: inherit;
+    display: block;
+    text-align: center;
+    margin-bottom: .5em;
+}
+
+span{
+    background-color: inherit;
+}
+
+.cantidad{
+    border: 1px solid rgba(0,0,0,.06);
+    padding: .5em 0;
+    background-color: #F8F8F8;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 1em;
+    align-items: center;
+}
+
+.cantidad h4{
+    background-color: inherit;
+}
+.cantidad label{
+    margin-right: .5em;
+}
+
+.cantidad input{
+    width: 40%;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,.2);
+}
+
+/*-- tarjeta --*/
+
+
+.enlaceProducto, .enlaceProducto:hover{
+    text-decoration: none;
+    color: inherit;
+}
+
+.enlaceProducto:hover{
+    /* background-color: #EBEBED; */
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 1;
+}

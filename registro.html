@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/login.css">
+    <script src="js/funciones.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet"> 
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="fondo">
+            <img src="img/fondo2.png" alt="">
+        </div>
+        <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 div-form">
+                <h1>Registro</h1>
+                <p>Completa los siguientes campos para iniciar sesión</p>
+                <form action="" class="form" id="form">
+                    <input type="text" placeholder="Nombre (s):" id="nombre">
+                    <input type="text" placeholder="Apellidos:" id="apellidos">
+                    <input type="email" placeholder="Correo:" id="correo">
+                    <input type="password" placeholder="Contraseña:" id="contraseña">
+                    <p class="error" id="error"></p>
+                    <button type="submit" class="boton">Iniciar sesión</button>
+                    <a href="login.html">¿Ya tienes una cuenta? Inicia sesión</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    
+    const form = document.getElementById('form');
+    const error = document.getElementById('error');
+    const URL = 'http://localhost:8000/usuarios/';
+    form.addEventListener('submit', async (e) =>{
+        e.preventDefault();
+
+        let data = new FormData();
+        data.append('nombre', document.getElementById('nombre').value);
+        data.append('apellidos', document.getElementById('apellidos').value);
+        data.append('correo', document.getElementById('correo').value);
+        data.append('contraseña', document.getElementById('contraseña').value);
+        data.append('status', 0);
+
+        const response = await mandarData(URL, data);
+        
+        switch (response) {
+            case 0:
+                error.style.display = 'none';
+                error.innerText = '';
+                navegar('login.html');
+            break;
+            
+            case 1:
+                error.style.display = 'block';
+                error.innerText = 'Correo o contraseña incorrectos';
+            break;
+
+            case 2:
+                error.style.display = 'block';
+                error.innerText = 'Uno o más campos vacíos';
+            break;
+        
+        }
+
+    });
+</script>

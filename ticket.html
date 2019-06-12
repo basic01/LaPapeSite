@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/ticket.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/funciones.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <title>La Pape</title>
+    <script>
+        validarUsuarioyCarrito();
+    </script>
+</head>
+<body>
+
+    <div class="fondoPopUp container-fluid" id="fondoPopUp">
+        <div class="row">
+            <div class="popUp">
+                <h4>La Pape</h4>
+                <p id="mensajePopUp">El carrito de compras ya está vacío </p>
+                <button class="boton" onclick="esconderPopUp()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="top">
+        <a href="index.html"><h1>La Pape</h1></a>
+        <div class="opciones">
+            <script>
+                if(localStorage.getItem('usuario')){
+                    document.querySelector('.opciones').innerHTML += `<i class="fas fa-door-open" onclick="cerrarSesion()"></i>`;
+                }
+                else{
+                    document.querySelector('.opciones').innerHTML += `<i class="fas fa-user" onclick="navegar('login.html')"></i>`;
+                }    
+            </script>
+            <i class="fas fa-shopping-cart" id="cart-icon" onclick="mostrarEsconder('shopping-cart')"></i>
+        </div>  
+    </div>
+
+    <div class="shopping-cart" id="shopping-cart">
+        <div id="shopping-cart-items">
+            
+        </div>
+
+        <div class="shopping-cart-total">
+            <div class="shopping-cart-total-subtotal total-data">
+                <h4>Subtotal:</h4>
+                <p>$<span id="subtotal">0.00</span></p>
+            </div>
+            <div class="shopping-cart-total-envio total-data">
+                <h4>Envío:</h4>
+                <p>$<span id="envio">0.00</span></p>
+            </div>
+            <div class="shopping-cart-total-total total-data">
+                <h3>Total:</h3>
+                <p>$<span id="total">0.00</span></p>
+            </div>
+        </div>
+        <div class="shopping-cart-options">
+            <button id="clear" class="boton cancelar" onclick="vaciarCarrito()">Vaciar</button>
+            <button id="shop" class="boton" onclick="navegarCompra('carrito.html')">Comprar</button>
+        </div>
+
+    </div>
+
+    <div class="container-fluid contenedor">  
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row rowTicket">
+                    <div class="col-lg-6 col-md-7 col-sm-10 col-12 divTicket">
+                        <div class="ticket" id="ticket">
+                            <div class="header">
+                                <h3>La Pape</h3>
+                                <p id="fecha">2019-6-11 23:3:58</p>
+                            </div>
+                            <div class="extraInfo">
+                                <h4>Cuenta bancaria</h4>
+                                <p>Cuenta HSBC: 892376283</p>
+                            </div>
+                            <div class="divItems">
+                                <h4>Artículos</h4>
+                                <div class="items" id="items">
+                                    
+                                </div>
+                                <div class="divTotales row">
+                                    <div class="tot col-lg-4 col-md-4 col-sm-4 col-6">
+                                        <label>Subtotal:</label>
+                                        <p>$<span id="subtotalCompra"></span></p>
+                                    </div>
+                                    <div class="tot col-lg-4 col-md-4 col-sm-4 col-6">
+                                        <label>Envío:</label>
+                                        <p>$<span id="envioCompra"></span></p>
+                                    </div>
+                                    <div class="tot total col-md-4 col-lg-4 col-sm-4 col-12">
+                                        <label>Total:</label>
+                                        <p>$<span id="totalCompra"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-7 col-sm-10 col-11 mt-3 divBtn">
+                        <button class="boton" id="btnPDF" onclick="getPDF('ticket')">Descargar PDF</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+     //Función para llamar funciones asíncronas
+     async function work(){
+        await getData();
+    }
+    
+    work();
+
+    async function getFechaHora(){
+        let today = new Date();
+        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        let dateTime = date+' '+time;
+        return dateTime;
+    }
+
+    async function getData(){
+        //Fecha
+        document.getElementById('fecha').innerText = await getFechaHora();
+
+        //Carrito
+        const div = document.getElementById('items');
+        let carrito = await localStorage.getItem('carrito');
+        carrito = JSON.parse(carrito);
+        carrito.forEach(element => {
+            div.innerHTML += `
+                <div class="item">
+                    <p class="nombreCompra">${element.nombre}</p>
+                    <p> Precio: $ <span class="precioCompra">${element.precio}</span></p>
+                    <p class="cantidad"> Cantidad: <span class="cantidadCompra">${element.cantidad}</span></p>
+                </div>
+            `;
+        });
+
+        //Totales
+        let totales = await localStorage.getItem('totales');
+        totales = JSON.parse(totales);
+        document.getElementById('subtotalCompra').innerText = totales.subtotal;
+        document.getElementById('envioCompra').innerText = totales.envio;
+        document.getElementById('totalCompra').innerText = totales.total;
+
+        await localStorage.removeItem('carrito');
+        await localStorage.removeItem('totales');
+    }
+
+</script>
+

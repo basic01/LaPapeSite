@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/carrito.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/funciones.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <title>La Pape</title>
+</head>
+<body>
+
+    <div class="fondoPopUp container-fluid" id="fondoPopUp">
+        <div class="row">
+            <div class="popUp">
+                <h4>La Pape</h4>
+                <p id="mensajePopUp"></p>
+                <button class="boton" onclick="esconderPopUp()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="top">
+        <a href="index.html"><h1>La Pape</h1></a>
+        <div class="opciones">
+            <script>
+                if(localStorage.getItem('usuario')){
+                    document.querySelector('.opciones').innerHTML += `<i class="fas fa-door-open" onclick="cerrarSesion()"></i>`;
+                }
+                else{
+                    document.querySelector('.opciones').innerHTML += `<i class="fas fa-user" onclick="navegar('login.html')"></i>`;
+                }    
+            </script>
+            <i class="fas fa-shopping-cart" id="cart-icon" onclick="navegar('carrito.html')"></i>
+        </div>  
+    </div>
+
+
+    <div class="container-fluid contenedor">  
+        <div class="row row1">
+            <div class="col-lg-6 col-md-8 col-sm-10">
+                <div class="shopping-cart" id="shopping-cart">
+                    <div id="shopping-cart-items">
+                        
+                    </div>
+                
+                    <div class="shopping-cart-total">
+                        <div class="shopping-cart-total-subtotal total-data">
+                            <h4>Subtotal:</h4>
+                            <p>$<span id="subtotal">0.00</span></p>
+                        </div>
+                        <div class="shopping-cart-total-envio total-data">
+                            <h4>Envío:</h4>
+                            <p>$<span id="envio">0.00</span></p>
+                        </div>
+                        <div class="shopping-cart-total-total total-data">
+                            <h3>Total:</h3>
+                            <p>$<span id="total">0.00</span></p>
+                        </div>
+                    </div>
+                    <div class="shopping-cart-options">
+                        <button id="clear" class="boton cancelar" onclick="vaciarCarrito()">Vaciar</button>
+                        <button id="shop" class="boton" onclick="navegarCompraFinal('envio.html')">Comprar</button>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    async function work(){
+        await obtenerItemsCarrito();
+        //await mostrarItems();
+        // await mostrarTotales('pedido-subtotal', 'pedido-envio', 'pedido-total');
+    }
+    
+    work();
+
+</script>
+

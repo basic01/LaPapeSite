@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/funciones.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <title>La Pape</title>
+    <script>
+        validarUsuarioyCarrito();
+    </script>
+</head>
+<body>
+
+    <div class="fondoPopUp container-fluid" id="fondoPopUp">
+        <div class="row">
+            <div class="popUp">
+                <h4>La Pape</h4>
+                <p id="mensajePopUp"></p>
+                <button class="boton" onclick="esconderPopUp()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="top">
+        <a href="index.html"><h1>La Pape</h1></a>
+        <div class="opciones">
+            <script>
+                if(localStorage.getItem('usuario')){
+                    document.querySelector('.opciones').innerHTML += `<i class="fas fa-door-open" onclick="cerrarSesion()"></i>`;
+                }
+                else{
+                    document.querySelector('.opciones').innerHTML += `<i class="fas fa-user" onclick="navegar('login.html')"></i>`;
+                }    
+            </script>
+            <i class="fas fa-shopping-cart" id="cart-icon" onclick="mostrarEsconder('shopping-cart')"></i>
+        </div>  
+    </div>
+
+    <div class="shopping-cart" id="shopping-cart">
+        <div id="shopping-cart-items">
+            
+        </div>
+
+        <div class="shopping-cart-total">
+            <div class="shopping-cart-total-subtotal total-data">
+                <h4>Subtotal:</h4>
+                <p>$<span id="subtotal">0.00</span></p>
+            </div>
+            <div class="shopping-cart-total-envio total-data">
+                <h4>Envío:</h4>
+                <p>$<span id="envio">0.00</span></p>
+            </div>
+            <div class="shopping-cart-total-total total-data">
+                <h3>Total:</h3>
+                <p>$<span id="total">0.00</span></p>
+            </div>
+        </div>
+        <div class="shopping-cart-options">
+            <button id="clear" class="boton cancelar" onclick="vaciarCarrito()">Vaciar</button>
+            <button id="shop" class="boton" onclick="navegarCompra('carrito.html')">Comprar</button>
+        </div>
+
+    </div>
+
+    <div class="container-fluid">  
+        <div class="row mt-4">
+            <div class="col-lg-5 col-md-8 col-sm-10 div-form">
+                <h1>Datos envío</h1>
+                <p>Completa los siguientes campos para realizar el envío</p>
+                <form action="" class="form" id="form">
+                    <input type="text" name="" id="direccion" placeholder="Dirección:">
+                    <input type="text" name="" id="codigoPostal" placeholder="Código Postal:" maxlength="5">
+                    <input type="text" name="" id="ciudad" placeholder="Ciudad:">
+                    <input type="text" name="" id="municipio" placeholder="Municipio:">
+                    <p class="error" id="error"></p>
+                    <button type="submit" class="boton">Finalizar compra</button>
+                </form>
+                    <button class="boton cancelar" onclick="navegar('carrito.html')">Cancelar compra</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+    async function work(){
+        await obtenerItemsCarrito();
+    }
+    
+    work();
+
+    const form = document.getElementById('form');
+    const error = document.getElementById('error');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const direccion = document.getElementById('direccion').value;
+        const codigoPostal = document.getElementById('codigoPostal').value;
+        const ciudad = document.getElementById('ciudad').value;
+        const municipio = document.getElementById('municipio').value;
+
+        const inputs = form.getElementsByTagName('input');
+        banderaCamposVacios = false;
+        for (let index = 0; index < inputs.length; index++) {
+            if(inputs[index].value == ""){
+                banderaCamposVacios = true;
+            }
+        }
+
+        if(banderaCamposVacios){
+            error.style.display = 'block';
+            error.innerText = 'Uno o más campos vacíos';
+        }
+        else{
+            error.style.display = 'none';
+            error.innerText = '';
+
+            //Obtener usuario activo
+            let usuario = localStorage.getItem('usuario');
+            usuario = JSON.parse(usuario);
+
+            //POST Dirección
+            let data = new FormData();
+            data.append('usuario',  usuario.id);
+            data.append('direccion', direccion);
+            data.append('codigoPostal', codigoPostal);
+            data.append('ciudad', ciudad);
+            data.append('municipio', municipio);
+
+            const responseDireccion = await mandarData('http://localhost:8000/direcciones/', data);
+            console.log(responseDireccion.id);
+
+
+            //POST Compra
+            let totales = localStorage.getItem('totales');
+            totales = JSON.parse(totales);
+
+            let dataCompra = new FormData();
+            dataCompra.append('usuario', usuario.id);
+            dataCompra.append('direccion', responseDireccion.id);
+            dataCompra.append('subtotal', totales.subtotal);
+            dataCompra.append('envio', totales.envio);
+            dataCompra.append('total', totales.total);
+            dataCompra.append('status', 0);
+
+            const responseCompra = await mandarData('http://localhost:8000/compras/', dataCompra);
+            navegar('ticket.html');
+        }
+    });
+
+    async function cancelarCompra(){
+        vaciarCarrito();
+        navegar('productos.html');
+    }
+
+
+</script>

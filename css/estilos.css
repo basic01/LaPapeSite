@@ -1,0 +1,248 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #FEFEFE;
+    outline: none;
+}
+
+a, button{
+    cursor: pointer;
+}
+
+.boton{
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 1em;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    background-color: #007ACC;
+}
+
+
+.boton:hover{
+    text-decoration: none;
+    color: #fff;
+}
+
+h3, h4, h1{
+    font-weight: bold;
+    background-color: inherit;
+}
+
+
+/*-- intro --*/
+.contenedor{
+    margin-top: 5em;
+}
+
+.top{
+    background-color: #282626;
+    color: #fff;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 5em;
+    left: 0;
+    z-index: 998;
+}
+
+.top h1{
+    /* width: 90%; */
+    padding: 10px 0;
+    float: left;
+    margin-left: calc(5% + .5em);
+}
+
+.top .opciones{
+    background-color: inherit;
+    float: right;
+    height: 5em;
+    margin-right: calc(5% + .5em);
+}
+
+@media (max-width:500px){
+    body{
+        font-size: .9em;
+    }
+    .top h1{
+        font-size: 1.5em;
+    }
+
+    .top .opciones{
+        margin-right: 0;
+    }
+
+    .top .opciones i{
+        padding: 1.4em 1em;
+        float: left;
+    }
+    #shopping-cart{
+        right: 0;
+    }
+}
+
+.opciones i{
+    padding: 1.4em;
+    cursor: pointer;
+    font-size: 1.3em;
+    background-color: rgba(0,0,0,.3);
+    transition: .5s all;
+}
+
+.opciones i:hover{
+    background-color: rgba(0,0,0,.8);
+    transition: .9s all;
+}
+
+.shopping-cart{
+    position: fixed;
+    z-index: 998;
+    right: calc(5% + .5em);
+    top: 5em;
+    background-color:#F8F8F8;
+    box-shadow: 0px 0px 5px 5px rgba(0,0,0,.1);
+    border-radius: 0 0 5px 5px;
+    width: 20em;
+    padding: 5px;
+    padding-bottom: 0;
+    display: none;
+}
+
+.shopping-cart-item, .itemDiv{
+    background-color: #fff;
+    margin-bottom: .5em;
+    padding: 5px;
+    float: left;
+    border-radius: 3px;
+    width: 100%;
+    border: 1px solid rgba(0,0,0,.1);
+}
+
+.shopping-cart-item img, .itemDiv img{
+    width: 3em;
+    float: left;
+    height: 3em;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.5);
+}
+
+.shopping-cart-item-data{
+    padding: 5px;
+    width: calc(100% - 6.3em);
+    float: left;
+    margin-left: 5px;
+    box-sizing: border-box;
+    font-size: .8em;
+}
+
+.shopping-cart-item-data p{
+    margin: 0;
+}
+
+.shopping-cart-item-nombre{
+    font-weight: bold;
+    font-size: .95em;
+}
+
+.shopping-cart-item-precio{
+    float: left;
+}
+
+.shopping-cart-item-cantidad{
+    float: right;
+}
+
+.shopping-cart-item i, .itemDiv i{
+    float: left;
+    text-align: center;
+    font-size: 1.1em;
+    margin-top: .3em;
+    margin-left: 7px;
+    color: #007ACC;
+    cursor: pointer;
+}
+
+
+.shopping-cart-total{
+    padding: 5px 10px;
+    float: left;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: .5em;
+    background-color: inherit;
+}
+
+.shopping-cart-total-subtotal{
+    float: left;
+    margin-right: 60px;
+}
+.shopping-cart-total-envio{
+    float: left;
+}
+
+.shopping-cart-total-total{
+    float: right;
+}
+
+.total-data{
+    background-color: inherit;
+}
+
+.total-data h3, .total-data h4{
+    float: left;
+    margin-bottom: 0;
+    background-color: inherit;
+    font-size: .9em;
+}
+
+.total-data h3{
+    margin-top: -3px;
+    font-size: 1em;
+}
+
+.total-data p{
+    margin-bottom: 0;
+    font-size: .9em;
+    background-color: inherit;
+}
+
+.total-data span{
+    background-color: inherit;
+}
+
+.shopping-cart-options .boton{
+    width: 45%;
+    float: left;
+    font-size: .8em;
+}
+
+.shopping-cart-options #clear{
+    margin-right: 5%;
+    margin-left: 3%;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover{
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.cancelar{
+    background-color: #FA5A56;
+}
