@@ -17,7 +17,7 @@
     <preference name="orientation" value="portrait" />
     <preference name="fullscreen" value="true" />
 
-    <icon src="img/cart.png" />
+    <icon src="img/logo.png" />
         <access origin="*"/>
 
     <plugin name="cordova-plugin-whitelist" version="1" />
