@@ -28,7 +28,7 @@
 
 
     <div class="top">
-        <a href="productos.html"><h1>La Pape</h1></a>
+        <a href="index.html"><h1>La Pape</h1></a>
         <div class="opciones">
             <script>
                 if(localStorage.getItem('usuario')){
@@ -84,7 +84,7 @@
 <script>
 
     //Obtener datos de API y poner en tarjetas
-    const url = 'http://127.0.0.1:8000/productos/';
+    const url = 'https://lapape.pythonanywhere.com/productos/';
     async function obtenerData (url, divId){
         const response = await fetch(url);
         const data = await response.json(); 
