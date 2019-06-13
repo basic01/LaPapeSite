@@ -88,6 +88,7 @@ a, button{
 
     .div-form{
         margin-top: -3em;
+        background-color: red;
     }
 
     .fondo{
@@ -97,8 +98,4 @@ a, button{
     .cart-div{
         display: flex;
     }
-}
-
-a{
-    color: red;
 }
