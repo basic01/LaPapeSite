@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.phonegap.helloworld"
+        version   = "1.0.0">
+
+    <name>La Pape</name>
+
+    <description>
+         Aplicación móvil carrito de compras La Pape
+    </description>
+
+    <author email="paola_qdr@hotmail.com">
+        Paola Quezada
+    </author>
+    <preference name="orientation" value="portrait" />
+    <preference name="fullscreen" value="true" />
+
+    <icon src="img/cart.png" />
+        <access origin="*"/>
+
+    <plugin name="cordova-plugin-whitelist" version="1" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+
+</widget>
+        
+        
