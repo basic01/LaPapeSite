@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <title>La Pape</title>
+    <title>La Pape - Confirmación</title>
 </head>
 
 <style>
@@ -75,14 +75,14 @@
 
 <script>
 
-    let url = 'https://lapape.pythonanywhere.com/usuarios/';
+    let url = 'https://lapape.pythonanywhere.com/usuarios/1/';
     const form = new FormData();
     
     async function getURL(){
         const url_string = window.location.href;
         const direccion = new URL(url_string);
         const u = direccion.searchParams.get('u');
-        url += `${u}/`;
+        //url += `${u}/`;
     }
 
     async function obtenerData(url){
