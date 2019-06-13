@@ -87,8 +87,7 @@ a, button{
 @media (max-width:500px){
 
     .div-form{
-        margin-top: -3em;
-        background-color: red;
+        margin-top: -5em;
     }
 
     .fondo{
