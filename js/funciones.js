@@ -71,7 +71,7 @@ function validarUsuario(){
 
 function validarUsuarioyCarrito(){
     if(!localStorage.getItem('carrito') || !localStorage.getItem('usuario')){
-        navegar('productos.html');
+        navegar('index.html');
     }
 }
 
@@ -118,7 +118,7 @@ function navegarCompraFinal(liga){
 
 function cerrarSesion(){
     localStorage.clear();
-    navegar('productos.html');
+    navegar('index.html');
 }
 
 // ------------------------------------Fin funcionalidad nav---------------------------
