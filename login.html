@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/login.css">
     <script src="js/funciones.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet"> 
-    <title>La Pape - Login</title>
+    <title>La Pape</title>
 </head>
 <body>
     <div class="container-fluid">
@@ -37,10 +37,9 @@
     
     const form = document.getElementById('form');
     const error = document.getElementById('error');
-    const URL = 'http://localhost:8000/usuariosLogin/';
+    const URL = 'https://lapape.pythonanywhere.com/usuariosLogin/';
     form.addEventListener('submit', async (e) =>{
         e.preventDefault();
-
         let data = new FormData();
         data.append('correo', document.getElementById('correo').value);
         data.append('contraseña', document.getElementById('contraseña').value);
@@ -69,7 +68,7 @@
                 let usuario = JSON.stringify(response);
                 localStorage.setItem('usuario', usuario)
                 console.log(localStorage.getItem('usuario'));
-                navegar('productos.html');
+                navegar('index.html');
             break;
         }
 

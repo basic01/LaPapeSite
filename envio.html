@@ -138,7 +138,7 @@
             data.append('ciudad', ciudad);
             data.append('municipio', municipio);
 
-            const responseDireccion = await mandarData('http://localhost:8000/direcciones/', data);
+            const responseDireccion = await mandarData('https://lapape.pythonanywhere.com/direcciones/', data);
             console.log(responseDireccion.id);
 
 
@@ -154,14 +154,14 @@
             dataCompra.append('total', totales.total);
             dataCompra.append('status', 0);
 
-            const responseCompra = await mandarData('http://localhost:8000/compras/', dataCompra);
+            const responseCompra = await mandarData('https://lapape.pythonanywhere.com/compras/', dataCompra);
             navegar('ticket.html');
         }
     });
 
     async function cancelarCompra(){
         vaciarCarrito();
-        navegar('productos.html');
+        navegar('index.html');
     }
 
 
